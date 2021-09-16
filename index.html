@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="descripcion" content="Registro">
@@ -8,9 +9,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
 </head>
-<body>
 
-    
-    <script src="../Taller-7/ajax.js"></script>
+<body>
+    <div class="container">
+        <form name="Formulario1">
+            <div class="">
+                <label for="nombre"> Nombres:</label>
+                <input type="text" name="nombres" id="nombre">
+            </div>
+            <div class="">
+                <label for="apellido">Apellidos: </label>
+                <input type="text" name="apellido" id="apellido">
+            </div>
+            <div class="">
+                <label for="usuario">Usuario: </label>
+                <input type="text" name="usuario" id="usuario">
+
+            </div>
+            <div>
+                <label for="nacimiento">Fecha de nacimiento</label>
+                <input type="date" name="Fecha" id="nacimiento">
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input type="text" name="email" id="email">
+
+            </div>
+            <div>
+                <label for="telefono">Telefono: </label>
+                <input type="text" name="telefono" id="telefono">
+
+            </div>
+            <div>
+                <label for="contraseña">Contraseña</label>
+                <input type="password" name="contraseña" id="contraseña">
+
+            </div>
+            <div>
+                <label for="confirmar">Confirmar contraseña: </label>
+                <input type="password" name="contraseña" id="Confirmar">
+            </div>
+            <div>
+                <label for="lugar">Lugar de residencia</label>
+                <div>
+                    <label for="departamento">Departamento: </label>
+                    <select name="departamento" id="departamento">
+                      <option value="-">-</option>  
+                    </select>
+                </div>
+                <div>
+                    <label for="ciudad">Ciudad</label>
+                    <select name="ciudad" id="ciudad">
+                        <option value="-">-</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <script src="js/ajax.js"></script>
 </body>
+
 </html>
