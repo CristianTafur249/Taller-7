@@ -41,7 +41,7 @@ body{
     padding: .7em;
     border: none;
     outline: 0;
-    color: rgb(68, 67, 67);
+    color: #fff;
     border-bottom: 1px solid red;
 }
 
@@ -49,13 +49,14 @@ body{
     
     background: #b70e21;
     border: none;
+    color: #fff;
     text-transform: uppercase;
     padding: 1em;
 }
 .content-text form button:hover,
 .content-text form button:focus{
     background: #b1364f;
-    color: #fff;
+    color: #181818;
     transition: background-color 1.5s ease-out;
 }
 .selet-control{
