@@ -97,9 +97,6 @@ body{
 
 .form-control i {
 	visibility: hidden;
-	position: absolute;
-	top: 40px;
-	right: 10px;
 }
 
 .form-control.success i.fa-check-circle {
@@ -114,7 +111,6 @@ body{
 
 .form-control small {
 	color: #e74c3c;
-	position: absolute;
 	bottom: 0;
 	left: 0;
 	visibility: hidden;
