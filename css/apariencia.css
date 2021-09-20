@@ -152,3 +152,6 @@ body{
 .selet-control.error small {
 	visibility: visible;
 }
+.Link {
+    color: aquamarine;
+}
