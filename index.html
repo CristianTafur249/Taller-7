@@ -19,21 +19,21 @@
     <div class="content-text">
 
         <form id="formulario1" name="Formulario1">
-            <div class="form-control" >
+            <div class="form-control">
                 <label for="nombre">Nombres</label>
                 <input type="text" name="nombres" id="nombre">
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <br><small>error message</small>
             </div>
-            <div class="form-control" >
+            <div class="form-control">
                 <label for="apellido">Apellidos</label>
                 <input type="text" name="apellido" id="apellido">
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <br><small>error message</small>
             </div>
-            <div class="form-control" >
+            <div class="form-control">
                 <label for="usuario">Nombre de usuario</label>
                 <input type="text" name="usuario" id="usuario">
                 <i class="fas fa-check-circle"></i>
@@ -81,15 +81,22 @@
                     <h3 class="lugar">Lugar de residencia</h3>
                     <div>
                         <label for="departamento">Departamento: </label>
-                        <select name="departamento" id="departamento">
-                            <option value="-">-</option>
+                        <select onchange="traerDatos()" name="departamento" id="departamento">
+                            <option class="res" value="null">-</option>
+
                         </select>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <br><small>error message</small>
                     </div>
                     <div>
                         <label for="ciudad"> Ciudad de residencia</label>
                         <select name="ciudad" id="ciudad">
-                            <option value="-">-</option>
+                            <option value="null">-</option>
                         </select>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <br><small>error message</small>
                     </div>
                 </div>
             </div>
@@ -98,8 +105,44 @@
         </form>
 
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="js/ajax.js"></script>
+    <script>
+        function traerDatos() {
+            const xhttp = new XMLHttpRequest()
+            xhttp.open('GET', 'https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json', true)
+            xhttp.send()
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let datos = JSON.parse(this.responseText)
+                     var b =datos
+                     /* console.log(datos) */
+                     
+                    
+                    for (let item of datos) {
+                        if($("#departamento").val() == item.departamento){
+                            /* console.log(item.departamento) */
+                            /* console.log(item.id) */
+                            /* console.log(item) */
+                            /* console.log(Object.values(item)) */
+                            var r =Object.values(item.ciudades)
+                            /* console.log(r.length) */
+                            $("#ciudad").find('option').remove()
+                            for(var i=0; i<r.length;i++){
+                                console.log(r[i])
+                                
+                                $("#ciudad").append('<option value="' + r[i] + '">' + r[i] + '</option>')
+                            }
+                        }
+                        
+                        /* depar.innerHTML += `<option value="${item.departamento}">${item.departamento}</option>` */
+                    } 
+                }
+            }
+        }
+    </script>
+
 </body>
 
 </html>
