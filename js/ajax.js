@@ -7,40 +7,30 @@ const names = document.getElementById('nombre')
 const lastName = document.getElementById('apellido')
 const birth = document.getElementById('nacimiento')
 const  tell = document.getElementById('telefono')
+const depar = document.getElementById('departamento')
+const ciud = document.getElementById('ciudad')
 
-/* const validarF = (e) => {
-    switch (e.target.name){
-        case "usuario":
-        if(){
-            setErrorPor(e.target.name, 'No puede dejar el espacio em blanco')
+function traerDatos(){
+    const xhttp= new XMLHttpRequest()
+    xhttp.open('GET','https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json',true)
+    xhttp.send()
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status==200){
+            let datos = JSON.parse(this.responseText)
+            /* console.log(datos) */
+            
+            for(let item of datos){
+                depar.innerHTML += `<option value="${item.departamento}">${item.departamento}</option>`
+
+            } 
         }
-        break
-        case "nombres":
-        break
-        case "apellido":
-        break
-        case "Fecha":
-        break
-        case "email":
-        break
-        case "telefono":
-        break
-        case "contraseña":
-        break
-        case "Confirmar":
-        break
     }
 }
+depar.addEventListener('click', traerDatos())
 
-
-
-inputs.forEach((input)=>{
-    input.addEventListener('keyup', validarF)
-    input.addEventListener('blur', validarF)
-}) */
 formulario.addEventListener('submit', (e) => {
     e.preventDefault()
-    checkInputs();
+    checkInputs()
 })
 function checkInputs(){
     const userVal = usuario.value.trim()
@@ -88,6 +78,32 @@ function checkInputs(){
     }else {
         setSuccesspor(lastName)
     }
+    if(tellVal==''){
+        setErrorPor(tell, 'No puede dejar este espacio en blanco')
+    }else if(!isTell(tellVal)){
+        setErrorPor(tell, 'el numero de telefono no es valido')
+    } else{
+        setSuccesspor(tell)
+    }
+    if(calcularEdad(birthVal)<18){
+        setErrorPor(birth, 'Debes ser mayor de edad para registrarte' )
+    }else if(calcularEdad(birthVal)>=100){
+        setErrorPor(birth, 'Debes tener menos de 100 años')
+    }else if(birthVal==''){
+        setErrorPor(birth, 'Dbe selecionar su fecha de nacimiento')
+    }else{
+        setSuccesspor(birth)
+    }
+    if (depar.value == 'null'){
+        setErrorPor(depar, 'Debe selecionar un departamento' )
+    }else{
+        setSuccesspor(depar)
+    }
+    if (ciud.value == 'null'){
+        setErrorPor(ciud, 'Debe selecionar una Ciudad' )
+    }else{
+        setSuccesspor(ciud)
+    }
 }
 function setSuccesspor(input) {
     const formControl = input.parentElement
@@ -105,3 +121,26 @@ function isuser(user) {
 function isEmail(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
+function isTell (tell){
+    return /^[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-\s]){3}|(\d{2}[\*\.\-\s]){4}|(\d{4}[\*\.\-\s]){2})|\d{8}|\d{10}|\d{12}/.test(tell)
+}
+function calcularEdad(fecha_nacimiento) {
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha_nacimiento);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+    return edad;
+}
+
+$("#departamento").change(function() {
+    $("#ciudades").empty();
+    $.getJSON('http://localhost/getPoblacionesJson.php?pr='+$("#provincias").val(),function(data){
+        console.log(JSON.stringify(data));
+        $.each(data, function(k,v){
+            $("#poblaciones").append("<option value=\""+k+"\">"+v+"</option>");
+        }).removeAttr("disabled");
+    });
+});
