@@ -78,6 +78,16 @@ function checkInputs(){
     }else{
         setSuccesspor(password2)
     }
+    if(nameVal==''){
+        setErrorPor(names, 'No puede dejar este espacio en blanco')
+    }else {
+        setSuccesspor(names)
+    }
+    if(lastNameVal==''){
+        setErrorPor(lastName, 'No puede dejar este espacio en blanco')
+    }else {
+        setSuccesspor(lastName)
+    }
 }
 function setSuccesspor(input) {
     const formControl = input.parentElement
