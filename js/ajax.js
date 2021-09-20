@@ -58,6 +58,8 @@ function checkInputs(){
     }
     if(passVal == ''){
         setErrorPor(password, 'No se puede dejar este espacio en blanco')
+    }else if(passVal== userVal){
+        setErrorPor(password, 'El usuario y la contraseña deben ser diferentes')
     }else {
         setSuccesspor(password)
     }
@@ -65,6 +67,8 @@ function checkInputs(){
         setErrorPor(password2, 'No se puede dejar este espacio en blanco')
     }else if(passVal2 != passVal){
         setErrorPor(password2, 'Las contraseñas no coinciden')
+    }else if(passVal2== userVal){
+        setErrorPor(password, 'El usuario y la contraseña deben ser diferentes')
     }else{
         setSuccesspor(password2)
     }
