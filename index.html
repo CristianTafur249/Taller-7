@@ -116,33 +116,32 @@
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     let datos = JSON.parse(this.responseText)
-                     var b =datos
-                     /* console.log(datos) */
-                     
-                    
+                    var b = datos
+                    /* console.log(datos) */
+
+
                     for (let item of datos) {
-                        if($("#departamento").val() == item.departamento){
+                        if ($("#departamento").val() == item.departamento) {
                             /* console.log(item.departamento) */
                             /* console.log(item.id) */
                             /* console.log(item) */
                             /* console.log(Object.values(item)) */
-                            var r =Object.values(item.ciudades)
+                            var r = Object.values(item.ciudades)
                             /* console.log(r.length) */
                             $("#ciudad").find('option').remove()
-                            for(var i=0; i<r.length;i++){
+                            for (var i = 0; i < r.length; i++) {
                                 /* console.log(r[i]) */
-                                
+
                                 $("#ciudad").append('<option value="' + r[i] + '">' + r[i] + '</option>')
                             }
                         }
-                        
+
                         /* depar.innerHTML += `<option value="${item.departamento}">${item.departamento}</option>` */
-                    } 
+                    }
                 }
             }
         }
     </script>
-
 </body>
 
 </html>
