@@ -118,8 +118,6 @@
                     let datos = JSON.parse(this.responseText)
                     var b = datos
                     /* console.log(datos) */
-
-
                     for (let item of datos) {
                         if ($("#departamento").val() == item.departamento) {
                             /* console.log(item.departamento) */
@@ -131,12 +129,9 @@
                             $("#ciudad").find('option').remove()
                             for (var i = 0; i < r.length; i++) {
                                 /* console.log(r[i]) */
-
                                 $("#ciudad").append('<option value="' + r[i] + '">' + r[i] + '</option>')
                             }
                         }
-
-                        
                     }
                 }
             }
