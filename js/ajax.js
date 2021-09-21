@@ -1,4 +1,5 @@
 const formulario = document.getElementById('formulario1')
+const inputs =document.querySelectorAll('#formulario1 input')
 const usuario = document.getElementById('usuario')
 const email = document.getElementById('email')
 const password = document.getElementById('contraseña')
@@ -27,6 +28,11 @@ function traerDatos(){
     }
 }
 depar.addEventListener('click', traerDatos())
+inputs.forEach(input => {
+    input.addEventListener('keyup', checkInputs)
+    input.addEventListener('blur', checkInputs)
+    
+});
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -51,9 +57,9 @@ function checkInputs(){
     }
     if(emailVal == ''){
         setErrorPor(email, 'No puede dejar este expacio en blanco')
-    }else if(isEmail(emailVal)){
+    }/* else if(isEmail(emailVal)){
         setErrorPor(email, 'No es un email valido')
-    }else{
+    } */ else{
         setSuccesspor(email)
     }
     if(passVal == ''){
@@ -122,9 +128,9 @@ function setErrorPor(input,mensage){
 function isuser(user) {
     return /^[a-zA-Z0-9\_\-]{4,16}$/.test(user)
 }
-function isEmail(email) {
-	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-}
+/*  function isEmail(email) {
+	return /^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/.test(email);
+}  */
 function isTell (tell){
     return /^[\(]?[\+]?(\d{2}|\d{3})[\)]?[\s]?((\d{6}|\d{8})|(\d{3}[\*\.\-\s]){3}|(\d{2}[\*\.\-\s]){4}|(\d{4}[\*\.\-\s]){2})|\d{8}|\d{10}|\d{12}/.test(tell)
 }
