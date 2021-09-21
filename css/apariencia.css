@@ -124,6 +124,11 @@ body{
 	border-color: #2ecc71;
 }
 
+.selet-control option{
+    background: #222222;
+    color: #e74c3c;
+}
+
 .selet-control.error input {
 	border-color: #e74c3c;
 }
